@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <link rel="stylesheet" href="css/style.css">
+    <title>Seller Registration</title>
+  </head>
+  <body>
+    <%- include('partials/header'); -%>
+
+    <div class="container-fluid mt-4">
+        <div class="row justify-content-evenly">
+            <div class="col-lg-6">
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi porro amet, vero cum, expedita libero facilis excepturi deleniti necessitatibus dignissimos quisquam molestiae architecto laborum dolorem at provident fugit dolor fugiat exercitationem sed? Quis molestiae veniam culpa voluptate hic officia aperiam excepturi vel modi. Dicta ut quisquam, odit quaerat laboriosam soluta?</p>
+            </div>
+            
+        </div>
+        <div class="row justify-content-evenly">
+            <div class="col-lg-6 ">
+                <p class="h2 text-center">Seller Registration</p>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+      <div class="row justify-content-evenly">
+        <div class="col-lg-6">
+          <form action="/sellerRegiistration" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" required>
+              <div class="email error "></div>
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="mb-3">
+              <label for="BusinessName" class="form-label">Business Name</label>
+              <input type="text" class="form-control" id="BusinessName" aria-describedby="emailHelp" name="BusinessName" required>
+              <div class="Business error "></div>
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="mb-3">
+              <label for="PhoneNumber" class="form-label">Phone Number</label>
+              <input type="number" class="form-control" id="PhoneNumber" aria-describedby="emailHelp" name="PhoneNumber" required>
+              <div class="Phone error "></div>
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="mb-3">
+              <label for="NIDNumber"" class="form-label">NID Number</label>
+              <input type="number" class="form-control" id="NIDNumber"" aria-describedby="emailHelp" name="NIDNumber" required>
+              <div class="NID error"></div>
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="mb-3">
+              <label for="BankAcc" class="form-label">Bank Account Number</label>
+              <input type="number" class="form-control" id="BankAcc" aria-describedby="emailHelp" name="BankAcc" required>
+              <div class="Bank error"></div>
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="mb-3">
+              <label for="TinNumber" class="form-label">Tin Number</label>
+              <input type="number" class="form-control" id="TinNumber" aria-describedby="emailHelp" name="TinNumber" required>
+              <div class="Tin error"></div>
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="mb-3">
+              <label for="Address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="Address" aria-describedby="emailHelp" name="Address" required>
+              <div class="Address error"></div>
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="mb-3">
+              <label for="PickUpAddress" class="form-label">Pick UP Address</label>
+              <input type="text" class="form-control" id="PickUpAddress" aria-describedby="emailHelp" name="PickUpAddress" required>
+              <div class="Pick error"></div>
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Image</label>
+              <input class="form-control" type="file" id="formFile" name='image' required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+              <div class="password error"></div>
+            </div>
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm-Password</label>
+              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+              <div class="Confirm error"></div>
+            </div>
+           
+            <input type="submit">
+          </form>
+        </div>
+      </div>
+    </div>
+
+   
+               
+
+
+
+                  
+       
+        <script src="js/seller.js"></script>
+                  
+       
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+          
+
+    </script>
+   
+    
+
+  </body>
+</html>

@@ -1,0 +1,74 @@
+
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+          
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <% if (seller ) { %>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Feed</a>
+          </li>
+          
+         
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/sellerDashboard">Seller DashBoard</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/logOut">Logout</a>
+          </li>
+          <% } else if (user) { %>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Feed</a>
+          </li>
+          
+         
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/userDashboard">User DashBoard</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/logOut">Logout</a>
+          </li>
+          <% } else { %>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Become a
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/sellerRegiistration">Seller</a></li>
+              <li><a class="dropdown-item" href="/userRegiistration">Buyer</a></li>
+            
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Login
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/sellerLogin">as a seller</a></li>
+              <li><a class="dropdown-item" href="/userLogin">as a Buyer</a></li>
+            
+            </ul>
+          </li>
+          <% } %>
+
+         
+          
+          
+          
+        </ul>
+        
+      </div>
+    </div>
+  </nav>

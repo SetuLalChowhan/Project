@@ -1,0 +1,24 @@
+.error{
+    color: #ff0099;
+    margin: 10px 2px;
+    font-size: 0.8em;
+    font-weight: bold;
+  }
+  .image{
+    height: 300x;
+    width: 300px;
+  }
+
+  #image{
+    height: 700px;
+    width: 700px;
+  }
+
+  #footer ul li a{
+    text-decoration: none;
+    color: white;
+  }
+  #footer ul li a:hover{
+    text-decoration: underline;
+    
+  }
