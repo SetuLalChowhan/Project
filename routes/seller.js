@@ -9,6 +9,7 @@ const {
     sellerDashboard,
     logOut,
 } = require("../controller/sellerController");
+const {userPosttwo,newsFeed} =require('../controller/user')
 
 const multer = require("multer");
 
@@ -25,8 +26,16 @@ router.get("/", home);
 router.get("/sellerRegiistration", sellerGet);
 
 const uploadFile = "./public/images/seller";
+const uploadPost = "./public/images/userPost";
 const Storage = multer.diskStorage({
-    destination: uploadFile,
+    destination: uploadPost,
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+        console.log(file);
+    },
+});
+const Storagetwo = multer.diskStorage({
+    destination: uploadPost,
     filename: (req, file, cb) => {
         cb(null, file.originalname);
         console.log(file);
@@ -34,7 +43,10 @@ const Storage = multer.diskStorage({
 });
 
 const upload = multer({
-    storage: Storage,
+    storage: Storagetwo,
+});
+const uploadtwo = multer({
+    storage: Storagetwo,
 });
 
 router.post("/sellerRegiistration",upload.single("image"), sellervalidation(sellerSchema), sellerPost);
@@ -45,5 +57,7 @@ router.post("/sellerLogin", sellerLoginPost);
 router.get("/logOut", logOut);
 
 router.get("/sellerDashboard", requireAuth, sellerDashboard);
+router.get("/newsfeed",newsFeed );
+router.post("/sellerDashboard",uploadtwo.single('image') ,userPosttwo);
 
 module.exports = router,upload;
