@@ -2,6 +2,7 @@ const Seller = require("../Database/models/seller");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { duplicateError } = require("../Error/seller/duplicateError");
+const UserPost =require('../Database/models/userPost')
 const maxAge = 3 * 24 * 60 * 60;
 function home(req, res) {
     res.render("home");
@@ -101,4 +102,42 @@ function logOut(req, res) {
     res.redirect("/");
 }
 
-module.exports = { home, sellerGet, sellerPost, sellerLoginGet, sellerLoginPost, sellerDashboard, logOut };
+async function userPosttwo(req,res){
+    try{
+        const {
+            username,
+            categories,
+            description,
+            address,
+            imageName,
+        }=req.body;
+            const newUserPost = new UserPost({
+                username,
+                categories,
+                description,
+                address,
+                image: {
+                    data: req.file.filename,
+                    contentType: "image/jpg",
+                },
+                imageName,
+            });
+            await newUserPost.save();
+            res.json({ userPost: 'successfully posted' });
+            // res.render('home')
+        
+    } catch (err) {
+        console.log(err);
+    }
+    
+    
+    }
+    async function newsFeed(req,res){
+
+        const userPost = await UserPost.find().populate('user')
+        res.render('feed',{userPost:userPost});
+       
+    }
+    
+
+module.exports = { home, sellerGet, sellerPost, sellerLoginGet, sellerLoginPost, sellerDashboard, logOut ,userPosttwo,newsFeed};

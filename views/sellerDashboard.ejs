@@ -35,10 +35,10 @@
 
         </div>
         <div class="col-lg-6">
-          <form class="row g-3">
+          <form action="/sellerDashboard" class="row g-3" method="post" enctype="multipart/form-data">
             <div class="col-md-4">
               <label for="Busiiness1" class="form-label">Business Name</label>
-              <input type="text" class="form-control is-valid" id="Business" name="BusinessName" required>
+              <input type="text" class="form-control is-valid" id="Business" name="username" required>
             </div>
             <!-- <div class="col-md-3">
               <label for="Categories" class="form-label">Categories</label>
@@ -51,7 +51,7 @@
             </div> -->
             <div class="col-md-3">
               <label for="validationCustom04" class="form-label">Categories</label>
-              <select class="form-select" id="validationCustom04" required>
+              <select class="form-select" id="validationCustom04" name="categories" required>
                 <option selected disabled value="">Choose...</option>
                 <option>Rice</option>
                 <option>Potato</option>
@@ -61,17 +61,21 @@
             </div>
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
             </div>
 
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Adress</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="District Villege Post Office">
+              <label for="address" class="form-label">Adress</label>
+              <input type="text" class="form-control" id="address" aria-describedby="address" name="address" placeholder="District Villege Post Office">
               
             </div>
             <div class="mb-3">
               <label for="formFile" class="form-label">Image</label>
-              <input class="form-control" type="file" id="formFile">
+              <input class="form-control" type="file" id="formFile" name="image">
+            </div>
+            <div class="col-md-4">
+              <label for="ImageName" class="form-label">Image Name</label>
+              <input type="text" class="form-control is-valid" id="imageName" name="imageName" required>
             </div>
             
             

@@ -8,8 +8,10 @@ const {
     sellerLoginPost,
     sellerDashboard,
     logOut,
+    userPosttwo,
+    newsFeed
 } = require("../controller/sellerController");
-const {userPosttwo,newsFeed} =require('../controller/user')
+// const {userPosttwo,newsFeed} =require('../controller/user')
 
 const multer = require("multer");
 

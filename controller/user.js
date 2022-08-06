@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { duplicateError } = require("../Error/user/duplicateError");
 
-const UserPost =require('../Database/models/userPost')
+const UserPost = require("../Database/models/userPost");
 const maxAge = 3 * 24 * 60 * 60;
 function home(req, res) {
     res.render("home");
@@ -30,17 +30,8 @@ function userGet(req, res) {
 
 async function userPost(req, res) {
     try {
-        const {
-            username,
-            email,
-            PhoneNumber,
-            BankAcc,   
-            Address,
-            password,
-            confirmPassword,
-        } = req.body;
-        
-        
+        const { username, email, PhoneNumber, BankAcc, Address, password, confirmPassword } = req.body;
+
         if (password === confirmPassword) {
             const hashedPassword = await bcrypt.hash(password, 10);
             const newUser = new User({
@@ -50,7 +41,7 @@ async function userPost(req, res) {
                 BankAcc,
                 Address,
                 image: {
-                    // data: req.file.filename,
+                    data: req.file.filename,
 
                     contentType: "image/jpg",
                 },
@@ -94,17 +85,11 @@ function logOut(req, res) {
     res.cookie("jwt", "", { maxAge: 1 });
     res.redirect("/");
 }
+//post
 
-
-async function userPosttwo(req,res){
-try{
-    const {
-        username,
-        categories,
-        description,
-        address,
-        imageName,
-    }=req.body;
+async function userPosttwo(req, res) {
+    try {
+        const { username, categories, description, address, imageName } = req.body;
         const newUserPost = new UserPost({
             username,
             categories,
@@ -117,20 +102,84 @@ try{
             imageName,
         });
         await newUserPost.save();
-        res.json({ userPost: newUserPost });
-    
-} catch (err) {
-    console.log(err);
+        res.json({ userPost: "succefully posted" });
+        // res.render('home')
+    } catch (err) {
+        console.log(err);
+    }
 }
 
+async function userpostGet(req, res) {
+    try {
 
+        const {categories} =req.query;
+        const queryObject={};
+
+        if (categories) {
+            // queryObject.categories = { $regex: categories, $options: "i" };
+            queryObject.categories = categories;
+        }
+        console.log(queryObject)
+        const Post = await UserPost.find(queryObject);
+        res.json({ Post, totalPost: Post.length });
+    } catch (err) {
+        res.json({ err });
+    }
 }
 
-async function newsFeed(req,res){
+async function userPostUpdate(req, res) {
+    try {
+        const { id } = req.params;
+        const { username, categories, description, address, imageName } = req.body;
 
-    const userPost = await UserPost.find()
-    res.render('feed',{userPost:userPost});
-   
+        const Post = await UserPost.findById(id);
+        if (!Post) return res.send(" Post Not Found");
+
+        Post.set({
+            username,
+            categories,
+            description,
+            address,
+            imageName,
+        });
+
+        Post.save();
+        res.status(201).json({ Post });
+    } catch (err) {
+        res.json({ err });
+    }
 }
 
-module.exports = {home,userGet, userPost, userLoginGet, userLoginPost, userDashboard, logOut,userPosttwo ,newsFeed};
+async function userPostDelete(req, res) {
+    try {
+        const { id } = req.params;
+
+        const Post = await UserPost.findById(id);
+        if (!Post) return res.send(" Post Not Found");
+
+        Post.deleteOne();
+        res.json({ Post: "Post Deleted" });
+    } catch (err) {
+        res.json({ err });
+    }
+}
+
+async function newsFeed(req, res) {
+    const userPost = await UserPost.find().populate("user");
+    res.render("feed", { userPost: userPost });
+}
+
+module.exports = {
+    home,
+    userGet,
+    userPost,
+    userLoginGet,
+    userLoginPost,
+    userDashboard,
+    logOut,
+    userPosttwo,
+    newsFeed,
+    userpostGet,
+    userPostUpdate,
+    userPostDelete,
+};

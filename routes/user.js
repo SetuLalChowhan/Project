@@ -9,7 +9,10 @@ const {
     userDashboard,
     logOut,
     userPosttwo,
-    newsFeed
+    newsFeed,
+    userpostGet,
+    userPostUpdate,
+    userPostDelete
 } = require("../controller/user");
 
 const multer =require('multer');
@@ -60,8 +63,11 @@ router.post("/userLogin", userLoginPost);
 
 router.get("/logOut", logOut);
 
-router.get("/userDashboard", requireAuth, userDashboard);
+// router.get("/userDashboard", requireAuth, userDashboard);
 router.get("/newsfeed",newsFeed );
 router.post("/userDashboard",uploadtwo.single('image') ,userPosttwo);
+router.get("/userDashboard" ,userpostGet);
+router.patch("/userDashboard/:id", uploadtwo.single('image'),userPostUpdate);
+router.delete("/userDashboard/:id",userPostDelete);
 
 module.exports = router;
