@@ -8,7 +8,9 @@ const {
     sellerLoginPost,
     sellerDashboard,
     logOut,
-    userPosttwo,
+    sellerPosttwo,
+    sellerPostUpdate,
+    sellerPostDelete,
     newsFeed
 } = require("../controller/sellerController");
 // const {userPosttwo,newsFeed} =require('../controller/user')
@@ -60,6 +62,8 @@ router.get("/logOut", logOut);
 
 router.get("/sellerDashboard", requireAuth, sellerDashboard);
 router.get("/newsfeed",newsFeed );
-router.post("/sellerDashboard",uploadtwo.single('image') ,userPosttwo);
+router.post("/sellerDashboard",uploadtwo.single('image') ,sellerPosttwo);
+router.patch("/sellerDashboard/:id", uploadtwo.single('image'),sellerPostUpdate);
+router.delete("/sellerDashboard/:id",sellerPostDelete);
 
 module.exports = router,upload;

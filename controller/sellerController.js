@@ -2,7 +2,7 @@ const Seller = require("../Database/models/seller");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { duplicateError } = require("../Error/seller/duplicateError");
-const UserPost =require('../Database/models/userPost')
+const UserPost = require("../Database/models/userPost");
 const maxAge = 3 * 24 * 60 * 60;
 function home(req, res) {
     res.render("home");
@@ -29,7 +29,6 @@ function sellerGet(req, res) {
 }
 
 async function sellerPost(req, res) {
-    
     try {
         const {
             email,
@@ -43,8 +42,8 @@ async function sellerPost(req, res) {
             password,
             confirmPassword,
         } = req.body;
-        
-        const image =req.file
+
+        const image = req.file;
         if (password === confirmPassword) {
             const hashedPassword = await bcrypt.hash(password, 10);
             const newSeller = new Seller({
@@ -102,42 +101,79 @@ function logOut(req, res) {
     res.redirect("/");
 }
 
-async function userPosttwo(req,res){
-    try{
-        const {
+async function sellerPosttwo(req, res) {
+    try {
+        const { username, categories, description, address, imageName } = req.body;
+        const newUserPost = new UserPost({
+            username,
+            categories,
+            description,
+            address,
+            image: {
+                data: req.file.filename,
+                contentType: "image/jpg",
+            },
+            imageName,
+        });
+        await newUserPost.save();
+        res.json({ userPost: "successfully posted" });
+        // res.render('home')
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function sellerPostUpdate(req, res) {
+    try {
+        const { id } = req.params;
+        const { username, categories, description, address, imageName } = req.body;
+
+        const Post = await UserPost.findById(id);
+        if (!Post) return res.send(" Post Not Found");
+
+        Post.set({
             username,
             categories,
             description,
             address,
             imageName,
-        }=req.body;
-            const newUserPost = new UserPost({
-                username,
-                categories,
-                description,
-                address,
-                image: {
-                    data: req.file.filename,
-                    contentType: "image/jpg",
-                },
-                imageName,
-            });
-            await newUserPost.save();
-            res.json({ userPost: 'successfully posted' });
-            // res.render('home')
-        
+        });
+
+        Post.save();
+        res.status(201).json({ Post });
     } catch (err) {
-        console.log(err);
+        res.json({ err });
     }
-    
-    
-    }
-    async function newsFeed(req,res){
+}
 
-        const userPost = await UserPost.find().populate('user')
-        res.render('feed',{userPost:userPost});
-       
-    }
-    
+async function sellerPostDelete(req, res) {
+    try {
+        const { id } = req.params;
 
-module.exports = { home, sellerGet, sellerPost, sellerLoginGet, sellerLoginPost, sellerDashboard, logOut ,userPosttwo,newsFeed};
+        const Post = await UserPost.findById(id);
+        if (!Post) return res.send(" Post Not Found");
+
+        Post.deleteOne();
+        res.json({ Post: "Post Deleted" });
+    } catch (err) {
+        res.json({ err });
+    }
+}
+async function newsFeed(req, res) {
+    const userPost = await UserPost.find().populate("user");
+    res.render("feed", { userPost: userPost });
+}
+
+module.exports = {
+    home,
+    sellerGet,
+    sellerPost,
+    sellerLoginGet,
+    sellerLoginPost,
+    sellerDashboard,
+    logOut,
+    sellerPosttwo,
+    newsFeed,
+    sellerPostUpdate,
+    sellerPostDelete,
+};

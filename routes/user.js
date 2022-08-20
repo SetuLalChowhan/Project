@@ -24,6 +24,7 @@ const { userSchema } = require("../schema/userSchema");
 
 const { requireAuth, checkUser } = require("../middleware/protectRoutes/protectUserRoutes");
 const { checkSeller } = require("../middleware/protectRoutes/protectSellerRoutes");
+const { route } = require("./seller");
 router.get("*", checkSeller);
 router.get("*", checkUser);
 router.get("/", home)
@@ -63,11 +64,14 @@ router.post("/userLogin", userLoginPost);
 
 router.get("/logOut", logOut);
 
-// router.get("/userDashboard", requireAuth, userDashboard);
+router.get("/userDashboard", requireAuth, userDashboard);
 router.get("/newsfeed",newsFeed );
 router.post("/userDashboard",uploadtwo.single('image') ,userPosttwo);
-router.get("/userDashboard" ,userpostGet);
+// router.get("/userDashboard" ,userpostGet);
 router.patch("/userDashboard/:id", uploadtwo.single('image'),userPostUpdate);
 router.delete("/userDashboard/:id",userPostDelete);
+router.get('/cart',(req,res)=>{
+    res.render('cart');
+})
 
 module.exports = router;

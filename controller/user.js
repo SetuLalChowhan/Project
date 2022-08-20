@@ -116,7 +116,6 @@ async function userpostGet(req, res) {
         const queryObject={};
 
         if (categories) {
-            // queryObject.categories = { $regex: categories, $options: "i" };
             queryObject.categories = categories;
         }
         console.log(queryObject)
